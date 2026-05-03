@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NoteWise — Learn Through Music</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f5f4f0;
+      --text: #1a1a18;
+      --text-muted: #6b6b67;
+      --border: rgba(0,0,0,0.12);
+      --border-hover: rgba(0,0,0,0.25);
+      --tag-econ-bg: #EAF3DE; --tag-econ-text: #3B6D11;
+      --tag-bio-bg: #E1F5EE;  --tag-bio-text: #0F6E56;
+      --tag-cs-bg: #E6F1FB;   --tag-cs-text: #185FA5;
+      --thumb-econ: #d4ecc2;
+      --thumb-bio: #b8e8d4;
+      --thumb-cs: #c2ddf5;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --bg-secondary: #252522;
+        --text: #f0ede6;
+        --text-muted: #9a9990;
+        --border: rgba(255,255,255,0.1);
+        --border-hover: rgba(255,255,255,0.25);
+        --tag-econ-bg: #173404; --tag-econ-text: #C0DD97;
+        --tag-bio-bg: #04342C;  --tag-bio-text: #9FE1CB;
+        --tag-cs-bg: #042C53;   --tag-cs-text: #B5D4F4;
+        --thumb-econ: #1e3a0d;
+        --thumb-bio: #093d2c;
+        --thumb-cs: #0a2e4a;
+      }
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 1.75rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .site-title {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .site-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* ── Filters ── */
+    .filters {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.25rem 2rem;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .filter-btn:hover {
+      background: var(--bg-secondary);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* ── Main content ── */
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* ── Subject section ── */
+    .subject-section {
+      padding-top: 2rem;
+      margin-top: 1rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .subject-section.hidden { display: none; }
+
+    .subject-label {
+      font-family: 'Fraunces', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Video grid ── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Video card ── */
+    .video-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .video-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    /* YouTube iframe wrapper — preserves 16:9 */
+    .video-thumb {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: var(--bg-secondary);
+      overflow: hidden;
+    }
+
+    .video-thumb iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .card-body {
+      padding: 10px 12px 14px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.45;
+      margin-bottom: 3px;
+    }
+
+    .card-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .subject-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 9px;
+      border-radius: 999px;
+      margin-top: 7px;
+    }
+
+    .tag-econ { background: var(--tag-econ-bg); color: var(--tag-econ-text); }
+    .tag-bio  { background: var(--tag-bio-bg);  color: var(--tag-bio-text); }
+    .tag-cs   { background: var(--tag-cs-bg);   color: var(--tag-cs-text); }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem;
+      border-top: 0.5px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { flex-direction: column; gap: 4px; padding: 1.5rem 1rem; }
+      .filters { padding: 1rem; }
+      main { padding: 0 1rem 3rem; }
+      .video-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    }
+
+    @media (max-width: 400px) {
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="site-title">NoteWise</span>
+    <span class="site-tagline">learn through music</span>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filter('all', this)">All</button>
+    <button class="filter-btn" onclick="filter('econ', this)">Economics</button>
+    <button class="filter-btn" onclick="filter('bio', this)">Biology</button>
+    <button class="filter-btn" onclick="filter('cs', this)">Computer Science</button>
+  </div>
+
+  <main>
+
+    <!-- ══ ECONOMICS ══
+         To add a video: copy a .video-card block, change the YouTube ID in the
+         iframe src (the part after /embed/), and update the title/meta text.
+    -->
+    <section class="subject-section" data-subject="econ">
+      <div class="subject-label">Economics</div>
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/LOizdWMCLaA"
+              title="Supply and Demand"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Supply &amp; Demand</div>
+            <div class="card-meta">Khan Academy</div>
+            <span class="subject-tag tag-econ">Econ</span>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/983pNbMVmYk"
+              title="What Is Inflation?"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">What Is Inflation?</div>
+            <div class="card-meta">TED-Ed</div>
+            <span class="subject-tag tag-econ">Econ</span>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/G0SpKB-DPpk"
+              title="How Does the Stock Market Work?"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">How Does the Stock Market Work?</div>
+            <div class="card-meta">TED-Ed</div>
+            <span class="subject-tag tag-econ">Econ</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ BIOLOGY ══ -->
+    <section class="subject-section" data-subject="bio">
+      <div class="subject-label">Biology</div>
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/L0k-enzoeOM"
+              title="Mitosis Song"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Mitosis Song</div>
+            <div class="card-meta">Crash Course</div>
+            <span class="subject-tag tag-bio">Biology</span>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/8kK2zwjRV0M"
+              title="DNA Structure and Replication"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">DNA Structure &amp; Replication</div>
+            <div class="card-meta">TED-Ed</div>
+            <span class="subject-tag tag-bio">Biology</span>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/2_fGKMPpWGs"
+              title="Photosynthesis"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Photosynthesis</div>
+            <div class="card-meta">Crash Course</div>
+            <span class="subject-tag tag-bio">Biology</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ COMPUTER SCIENCE ══ -->
+    <section class="subject-section" data-subject="cs">
+      <div class="subject-label">Computer Science</div>
+      <div class="video-grid">
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/1GSjbWt0c9M"
+              title="Binary Numbers"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Binary Numbers</div>
+            <div class="card-meta">CS Unplugged</div>
+            <span class="subject-tag tag-cs">CompSci</span>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/rL8X2mlNHPM"
+              title="What Is an Algorithm?"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">What Is an Algorithm?</div>
+            <div class="card-meta">TED-Ed</div>
+            <span class="subject-tag tag-cs">CompSci</span>
+          </div>
+        </div>
+
+        <div class="video-card">
+          <div class="video-thumb">
+            <iframe src="https://www.youtube.com/embed/Dxcc6ycZ73M"
+              title="What Is the Internet?"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="card-body">
+            <div class="card-title">What Is the Internet?</div>
+            <div class="card-meta">Code.org</div>
+            <span class="subject-tag tag-cs">CompSci</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    NoteWise · Educational music videos for curious kids
+  </footer>
+
+  <script>
+    function filter(subject, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.subject-section').forEach(s => {
+        if (subject === 'all' || s.dataset.subject === subject) {
+          s.classList.remove('hidden');
+        } else {
+          s.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
