@@ -3,107 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tuniversity — Learn Through Music</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <title>Groove Academy — Educational Music for All</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #ffffff;
-      --bg-secondary: #f5f4f0;
-      --text: #1a1a18;
-      --text-muted: #6b6b67;
-      --border: rgba(0,0,0,0.12);
-      --border-hover: rgba(0,0,0,0.25);
-      --tag-econ-bg: #EAF3DE; --tag-econ-text: #3B6D11;
-      --tag-bio-bg: #E1F5EE;  --tag-bio-text: #0F6E56;
-      --tag-cs-bg: #E6F1FB;   --tag-cs-text: #185FA5;
-      --thumb-econ: #d4ecc2;
-      --thumb-bio: #b8e8d4;
-      --thumb-cs: #c2ddf5;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1c1c1a;
-        --bg-secondary: #252522;
-        --text: #f0ede6;
-        --text-muted: #9a9990;
-        --border: rgba(255,255,255,0.1);
-        --border-hover: rgba(255,255,255,0.25);
-        --tag-econ-bg: #173404; --tag-econ-text: #C0DD97;
-        --tag-bio-bg: #04342C;  --tag-bio-text: #9FE1CB;
-        --tag-cs-bg: #042C53;   --tag-cs-text: #B5D4F4;
-        --thumb-econ: #1e3a0d;
-        --thumb-bio: #093d2c;
-        --thumb-cs: #0a2e4a;
-      }
+      --purple: #4b2e83;
+      --purple-deep: #3a2266;
+      --purple-light: #ede8f5;
+      --gold: #b7a57a;
+      --gold-light: #f7f3ea;
+      --gold-bright: #e8c84a;
+      --white: #ffffff;
+      --off-white: #faf9f7;
+      --text: #1e1226;
+      --text-muted: #7a6e8a;
+      --border: rgba(75,46,131,0.12);
+      --border-hover: rgba(75,46,131,0.35);
+      --tag-econ-bg: #f7f3ea; --tag-econ-text: #7a5c1e;
+      --tag-bio-bg: #edf5f0;  --tag-bio-text: #1e5c3a;
+      --tag-cs-bg: #ede8f5;   --tag-cs-text: #4b2e83;
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--off-white);
       color: var(--text);
       min-height: 100vh;
     }
 
     /* ── Header ── */
     header {
+      background: var(--purple);
+      padding: 0;
+    }
+
+    .header-inner {
       max-width: 900px;
       margin: 0 auto;
-      padding: 2.5rem 2rem 1.75rem;
-      border-bottom: 0.5px solid var(--border);
+      padding: 2.25rem 2rem 2rem;
       display: flex;
       align-items: baseline;
-      gap: 14px;
+      gap: 16px;
+      border-bottom: 1px solid rgba(183,165,122,0.35);
     }
 
     .site-title {
-      font-family: 'Fraunces', serif;
-      font-size: 30px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
       font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.5px;
+      color: var(--white);
+      letter-spacing: 0.5px;
     }
 
     .site-tagline {
-      font-size: 14px;
-      color: var(--text-muted);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: var(--gold);
       font-style: italic;
+      letter-spacing: 0.3px;
     }
 
-    /* ── Filters ── */
+    /* ── Nav strip ── */
     .filters {
+      background: var(--purple);
+      border-bottom: 1px solid rgba(183,165,122,0.2);
+    }
+
+    .filters-inner {
       max-width: 900px;
       margin: 0 auto;
-      padding: 1.25rem 2rem;
+      padding: 0 2rem;
       display: flex;
-      gap: 8px;
+      gap: 0;
       flex-wrap: wrap;
     }
 
     .filter-btn {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 6px 16px;
-      border-radius: 999px;
-      border: 0.5px solid var(--border);
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 14px 18px;
+      border: none;
+      border-bottom: 2px solid transparent;
       background: transparent;
-      color: var(--text-muted);
+      color: rgba(255,255,255,0.55);
       cursor: pointer;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      transition: color 0.15s, border-color 0.15s;
     }
 
     .filter-btn:hover {
-      background: var(--bg-secondary);
-      color: var(--text);
+      color: rgba(255,255,255,0.85);
     }
 
     .filter-btn.active {
-      background: var(--text);
-      color: var(--bg);
-      border-color: var(--text);
+      color: var(--gold);
+      border-bottom-color: var(--gold);
     }
 
     /* ── Main content ── */
@@ -115,20 +114,21 @@
 
     /* ── Subject section ── */
     .subject-section {
-      padding-top: 2rem;
-      margin-top: 1rem;
-      border-top: 0.5px solid var(--border);
+      padding-top: 2.5rem;
+      margin-top: 0.5rem;
     }
 
     .subject-section.hidden { display: none; }
 
     .subject-label {
-      font-family: 'Fraunces', serif;
-      font-size: 13px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 500;
       font-style: italic;
-      color: var(--text-muted);
+      color: var(--purple);
       margin-bottom: 1.25rem;
-      letter-spacing: 0.3px;
+      padding-bottom: 0.6rem;
+      border-bottom: 0.5px solid var(--border);
     }
 
     /* ── Video grid ── */
@@ -140,16 +140,17 @@
 
     /* ── Video card ── */
     .video-card {
-      background: var(--bg);
+      background: var(--white);
       border: 0.5px solid var(--border);
-      border-radius: 12px;
+      border-radius: 6px;
       overflow: hidden;
-      transition: border-color 0.15s, transform 0.15s;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
 
     .video-card:hover {
       border-color: var(--border-hover);
       transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(75,46,131,0.08);
     }
 
     /* YouTube iframe wrapper — preserves 16:9 */
@@ -157,7 +158,7 @@
       position: relative;
       width: 100%;
       padding-top: 56.25%;
-      background: var(--bg-secondary);
+      background: var(--purple-light);
       overflow: hidden;
     }
 
@@ -170,28 +171,34 @@
     }
 
     .card-body {
-      padding: 10px 12px 14px;
+      padding: 10px 13px 13px;
     }
 
     .card-title {
-      font-size: 13px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
       font-weight: 500;
       color: var(--text);
-      line-height: 1.45;
+      line-height: 1.4;
       margin-bottom: 3px;
     }
 
     .card-meta {
       font-size: 11px;
+      font-weight: 300;
       color: var(--text-muted);
+      letter-spacing: 0.2px;
     }
 
     .subject-tag {
       display: inline-block;
-      font-size: 11px;
-      font-weight: 500;
-      padding: 2px 9px;
-      border-radius: 999px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 2px;
       margin-top: 7px;
     }
 
@@ -201,18 +208,24 @@
 
     /* ── Footer ── */
     footer {
+      background: var(--purple);
+      color: rgba(255,255,255,0.4);
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-inner {
       max-width: 900px;
       margin: 0 auto;
-      padding: 1.5rem 2rem;
-      border-top: 0.5px solid var(--border);
-      font-size: 12px;
-      color: var(--text-muted);
+      padding: 1.25rem 2rem;
+      border-top: 1px solid rgba(183,165,122,0.15);
     }
 
     /* ── Responsive ── */
     @media (max-width: 600px) {
-      header { flex-direction: column; gap: 4px; padding: 1.5rem 1rem; }
-      .filters { padding: 1rem; }
+      .header-inner { padding: 1.5rem 1rem; }
+      .filters-inner { padding: 0 1rem; }
       main { padding: 0 1rem 3rem; }
       .video-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
     }
@@ -223,17 +236,20 @@
 
     /* ── About ── */
     .about-section {
-      padding-top: 2rem;
-      margin-top: 1rem;
-      border-top: 0.5px solid var(--border);
+      padding-top: 2.5rem;
     }
     .about-section.hidden { display: none; }
     .about-intro {
-      font-size: 15px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
       color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 600px;
-      margin-bottom: 2rem;
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 0.5px solid var(--border);
     }
     .team-grid {
       display: grid;
@@ -241,27 +257,39 @@
       gap: 16px;
     }
     .team-card {
-      background: var(--bg);
+      background: var(--white);
       border: 0.5px solid var(--border);
-      border-radius: 12px;
+      border-radius: 6px;
       padding: 1.25rem;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .team-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 20px rgba(75,46,131,0.08);
     }
     .team-avatar {
-      width: 48px; height: 48px;
+      width: 44px; height: 44px;
       border-radius: 50%;
-      background: var(--bg-secondary);
+      background: var(--purple-light);
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 500;
-      color: var(--text-muted);
-      border: 0.5px solid var(--border);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px; font-weight: 500;
+      color: var(--purple);
+      border: 0.5px solid rgba(75,46,131,0.2);
     }
-    .team-name { font-size: 14px; font-weight: 500; color: var(--text); }
-    .team-role { font-size: 12px; color: var(--text-muted); margin-top: -4px; }
+    .team-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-weight: 500; color: var(--text);
+    }
+    .team-role {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.5px;
+      text-transform: uppercase; color: var(--gold); margin-top: -4px;
+    }
     .team-bio {
-      font-size: 12px; color: var(--text-muted); line-height: 1.5;
+      font-size: 12px; font-weight: 300; color: var(--text-muted); line-height: 1.55;
       border-top: 0.5px solid var(--border);
       padding-top: 8px; margin-top: 2px;
     }
@@ -270,17 +298,21 @@
 <body>
 
   <header>
-    <span class="site-title">Tuniversity</span>
-    <span class="site-tagline">learn through music</span>
+    <div class="header-inner">
+      <span class="site-title">Tuniversity</span>
+      <span class="site-tagline">learn through music</span>
+    </div>
   </header>
 
-  <div class="filters">
-    <button class="filter-btn active" onclick="filter('all', this)">All</button>
-    <button class="filter-btn" onclick="filter('econ', this)">Economics</button>
-    <button class="filter-btn" onclick="filter('bio', this)">Biology</button>
-    <button class="filter-btn" onclick="filter('cs', this)">Computer Science</button>
-    <button class="filter-btn" onclick="filter('about', this)">About Us</button>
-  </div>
+  <nav class="filters">
+    <div class="filters-inner">
+      <button class="filter-btn active" onclick="filter('all', this)">All</button>
+      <button class="filter-btn" onclick="filter('econ', this)">Economics</button>
+      <button class="filter-btn" onclick="filter('bio', this)">Biology</button>
+      <button class="filter-btn" onclick="filter('cs', this)">Computer Science</button>
+      <button class="filter-btn" onclick="filter('about', this)">About Us</button>
+    </div>
+  </nav>
 
   <main>
 
@@ -452,30 +484,30 @@
       <div class="team-grid">
 
         <div class="team-card">
-          <div class="team-avatar">MX</div> <!-- EDIT: Change to your initials -->
-          <div class="team-name">Michael Xiong</div> <!-- EDIT: Your name -->
-          <div class="team-role">Economics Teacher</div> <!-- EDIT: e.g. "Content Creator" -->
+          <div class="team-avatar">AB</div> <!-- EDIT: Change to your initials -->
+          <div class="team-name">First Last</div> <!-- EDIT: Your name -->
+          <div class="team-role">Your Role</div> <!-- EDIT: e.g. "Content Creator" -->
           <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
         </div>
 
         <div class="team-card">
-          <div class="team-avatar">EY</div> <!-- EDIT -->
-          <div class="team-name">Ethan Yan</div> <!-- EDIT -->
-          <div class="team-role">Biology Teacher</div> <!-- EDIT -->
+          <div class="team-avatar">CD</div> <!-- EDIT -->
+          <div class="team-name">First Last</div> <!-- EDIT -->
+          <div class="team-role">Your Role</div> <!-- EDIT -->
           <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
         </div>
 
         <div class="team-card">
-          <div class="team-avatar">CZ</div> <!-- EDIT -->
-          <div class="team-name">Chris Zhou</div> <!-- EDIT -->
-          <div class="team-role">Website Designer</div> <!-- EDIT -->
+          <div class="team-avatar">EF</div> <!-- EDIT -->
+          <div class="team-name">First Last</div> <!-- EDIT -->
+          <div class="team-role">Your Role</div> <!-- EDIT -->
           <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
         </div>
 
         <div class="team-card">
-          <div class="team-avatar">JY</div> <!-- EDIT -->
-          <div class="team-name">Justin Yen</div> <!-- EDIT -->
-          <div class="team-role">Biology Teacher</div> <!-- EDIT -->
+          <div class="team-avatar">GH</div> <!-- EDIT -->
+          <div class="team-name">First Last</div> <!-- EDIT -->
+          <div class="team-role">Your Role</div> <!-- EDIT -->
           <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
         </div>
 
@@ -485,7 +517,7 @@
   </main>
 
   <footer>
-    Tuniversity · Educational music videos for curious kids
+    <div class="footer-inner">Tuniversity &middot; Educational music videos for curious kids</div>
   </footer>
 
   <script>
