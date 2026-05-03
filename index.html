@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NoteWise — Learn Through Music</title>
+  <title>Tuniversity — Learn Through Music</title>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -220,12 +220,57 @@
     @media (max-width: 400px) {
       .video-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── About ── */
+    .about-section {
+      padding-top: 2rem;
+      margin-top: 1rem;
+      border-top: 0.5px solid var(--border);
+    }
+    .about-section.hidden { display: none; }
+    .about-intro {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .team-card {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .team-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 500;
+      color: var(--text-muted);
+      border: 0.5px solid var(--border);
+    }
+    .team-name { font-size: 14px; font-weight: 500; color: var(--text); }
+    .team-role { font-size: 12px; color: var(--text-muted); margin-top: -4px; }
+    .team-bio {
+      font-size: 12px; color: var(--text-muted); line-height: 1.5;
+      border-top: 0.5px solid var(--border);
+      padding-top: 8px; margin-top: 2px;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <span class="site-title">NoteWise</span>
+    <span class="site-title">Tuniversity</span>
     <span class="site-tagline">learn through music</span>
   </header>
 
@@ -234,6 +279,7 @@
     <button class="filter-btn" onclick="filter('econ', this)">Economics</button>
     <button class="filter-btn" onclick="filter('bio', this)">Biology</button>
     <button class="filter-btn" onclick="filter('cs', this)">Computer Science</button>
+    <button class="filter-btn" onclick="filter('about', this)">About Us</button>
   </div>
 
   <main>
@@ -391,18 +437,66 @@
       </div>
     </section>
 
+
+    <!-- ══ ABOUT US ══
+         Edit the four team members below:
+         - Change the two letters in .team-avatar to your initials
+         - Change "First Last" to your name
+         - Change "Your Role" to your role (e.g. "Content Creator", "Developer")
+         - Change the bio text to a short sentence about yourself
+    -->
+    <section class="about-section hidden" data-subject="about">
+      <div class="subject-label">About Us</div>
+      <!-- EDIT: Change this intro paragraph to describe your team/mission -->
+      <p class="about-intro">We're a team of four passionate about making learning fun. Tuniversity brings together music and education so students actually enjoy studying.</p>
+      <div class="team-grid">
+
+        <div class="team-card">
+          <div class="team-avatar">MX</div> <!-- EDIT: Change to your initials -->
+          <div class="team-name">Michael Xiong</div> <!-- EDIT: Your name -->
+          <div class="team-role">Economics Teacher</div> <!-- EDIT: e.g. "Content Creator" -->
+          <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">EY</div> <!-- EDIT -->
+          <div class="team-name">Ethan Yan</div> <!-- EDIT -->
+          <div class="team-role">Biology Teacher</div> <!-- EDIT -->
+          <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">CZ</div> <!-- EDIT -->
+          <div class="team-name">Chris Zhou</div> <!-- EDIT -->
+          <div class="team-role">Website Designer</div> <!-- EDIT -->
+          <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar">JY</div> <!-- EDIT -->
+          <div class="team-name">Justin Yen</div> <!-- EDIT -->
+          <div class="team-role">Biology Teacher</div> <!-- EDIT -->
+          <div class="team-bio">A short sentence about yourself and what you do for Tuniversity.</div> <!-- EDIT -->
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    NoteWise · Educational music videos for curious kids
+    Tuniversity · Educational music videos for curious kids
   </footer>
 
   <script>
     function filter(subject, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.querySelectorAll('.subject-section').forEach(s => {
-        if (subject === 'all' || s.dataset.subject === subject) {
+      document.querySelectorAll('.subject-section, .about-section').forEach(s => {
+        const match = subject === 'all'
+          ? s.classList.contains('subject-section')
+          : s.dataset.subject === subject;
+        if (match) {
           s.classList.remove('hidden');
         } else {
           s.classList.add('hidden');
